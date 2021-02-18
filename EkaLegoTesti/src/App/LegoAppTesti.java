@@ -23,6 +23,7 @@ public class LegoAppTesti {
 		
 		motorThread.start();
 		Button.waitForAnyPress();
+		//Tämä on Jennin tekemä testi
 		
 		
 
