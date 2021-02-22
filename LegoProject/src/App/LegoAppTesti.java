@@ -7,6 +7,26 @@ public class LegoAppTesti {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		float                range;
+        UltraSonicSensor     uss = new UltraSonicSensor(SensorPort.S4);
+        
+        range = uss.getRange();
+
+        Lcd.print(7, "range=");
+
+        // run until we find an obstacle within 1/4 of a meter.
+        
+        while (range > .25)
+        {
+            Lcd.clear(7, 7, 10);
+            Lcd.print(7, 7, "%.3f", range);
+            Delay.msDelay(500);
+
+            range = uss.getRange();
+        }
+        
+        // free up resources.
+        uss.close();
 		
 		System.out.println("Hei, tervetuloa kaikki!");
 		
@@ -18,22 +38,14 @@ public class LegoAppTesti {
 		Button.waitForAnyPress();
 		
 		Motor moottori1 = new Motor("Moottori 1");
+		//Distance distance1 = new Distance("Distance");
 		
 		Thread motorThread = new Thread(moottori1);
+		//Thread measureDistance=new Thread(Distance);
 		
 		motorThread.start();
 		Button.waitForAnyPress();
-		//Tämä on Jennin tekemä testi
-		//Toinen testi
 		
-		int MAX_DISTANCE = 50; // In centimeters
-		int PERIOD = 500; // In milliseconds
-		UltrasonicSensor us = new UltrasonicSensor(SensorPort.S4);
-		FeatureDetector fd = new RangeFeatureDetector(us, MAX_DISTANCE, PERIOD);
-		
-		Feature result = fd.scan();
-		if(result != null)
-			System.out.println("Range: " + result.getRangeReading().getRange());
 
 	}
 
