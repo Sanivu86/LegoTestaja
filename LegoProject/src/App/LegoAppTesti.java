@@ -26,7 +26,14 @@ public class LegoAppTesti {
 		//Tämä on Jennin tekemä testi
 		//Toinen testi
 		
+		int MAX_DISTANCE = 50; // In centimeters
+		int PERIOD = 500; // In milliseconds
+		UltrasonicSensor us = new UltrasonicSensor(SensorPort.S4);
+		FeatureDetector fd = new RangeFeatureDetector(us, MAX_DISTANCE, PERIOD);
 		
+		Feature result = fd.scan();
+		if(result != null)
+			System.out.println("Range: " + result.getRangeReading().getRange());
 
 	}
 
